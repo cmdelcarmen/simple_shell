@@ -62,12 +62,15 @@ char *pathInput(char *usrinput, char **patharray)
 	int matches = 0;
 
 	modedUsrInput = malloc(sizeof(char) * 100);
-
 	index1 = moveIndex(usrinput);
 
 	/*Plus 1 so it does not start at '/'*/
 	for (count = index1 + 1; usrinput[count] != '\0'; count++)
 	{
+		if (usrinput[count] == 32)
+		{
+			break;
+		}
 		if (usrinput[count] == '/')
 		{
 			lastBracketIndex = count;
@@ -75,13 +78,11 @@ char *pathInput(char *usrinput, char **patharray)
 		}
 	}
 	matches = verifyPath(usrinput, patharray);
-
 	if (matches == 0)
 	{
 		free(modedUsrInput);
 		return (usrinput);
 	}
-
 	if (usrinput[lastBracketIndex + 1] == '\0' || (num == 0))
 	{
 		free(modedUsrInput);
@@ -94,7 +95,6 @@ char *pathInput(char *usrinput, char **patharray)
 		count2++;
 	}
 	modedUsrInput[count2] = '\0';
-
 	free(usrinput);
 	return (modedUsrInput);
 }

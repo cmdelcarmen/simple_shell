@@ -84,16 +84,6 @@ int checkIfPath(char *usrinput)
 			checkpath = 1;
 
 			return (checkpath);
-			/**
-			 * newInput = pathInput(usrinput);
-
-			if (newInput == NULL)
-			{
-				free(newInput);
-				return (getArray(usrinput));
-			}
-			return (getArray(newInput));
-			*/
 		}
 	}
 	return (checkpath);
@@ -116,10 +106,11 @@ int verifyPath(char *usrinput, char **patharray)
 
 	for (count = index1 + 1; usrinput[count] != '\0'; count++)
 	{
+		if (usrinput[count] == 32)
+			break;
+
 		if (usrinput[count] == '/')
-		{
 			lastBracketIndex = count;
-		}
 	}
 	count2 = index1;
 
