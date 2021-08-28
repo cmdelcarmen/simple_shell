@@ -32,6 +32,9 @@ char **input(char **patharray)
 	{
 		prompt();
 		length = getline(&usrinput, &inputSize, stdin);
+		if (length == EOF)
+			return (handlesNullInput(usrinput));
+		
 		usrinput[length - 1] = '\0';
 		allSpaces = checkIfInputAllSpaces(usrinput);
 	}

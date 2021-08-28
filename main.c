@@ -3,7 +3,7 @@
 void get_c(int sig);
 /**
  * main - our simple shell, reads command from the command line
- * and searches for the appropiate fullPath to execute
+ * and searches for the appropiate file_name to execute
  * @ac: number of argumetns
  * @av: commands entered
  * @env: enviroment variables
@@ -11,48 +11,56 @@ void get_c(int sig);
  */
 int main(int ac, char **av, char **env)
 {
-	char **commandLineArgs, **patharray, *fullPath, *pathname;
+	char **command, **path_arr, *file_name, *file_folder;
 
 	(void)ac;
 	(void)av;
 	signal(SIGINT, get_c);
-	patharray = get_path(env);
+	path_arr = get_path(env);
 	while (1)
 	{
-		commandLineArgs = input(patharray);
-
-		if (commandLineArgs == NULL)
+		command = input(path_arr);
+		if (command == NULL)
 		{
-			freeDoublePointers(patharray);
+			freeDoublePointers(path_arr);
 			exit(0);
 		}
-		if (_strcmp(commandLineArgs[0], "env") == 0)
+
+		if (_strcmp(command[0], "env") == 0)
 		{
 			printDoubleArray(env);
-			freeDoublePointers(commandLineArgs);
+			freeDoublePointers(command);
 			continue;
 		}
-		if (_strcmp(commandLineArgs[0], "exit") == 0)
+		if (_strcmp(command[0], "exit") == 0)
 		{
-			freeDoublePointers(patharray);
-			freeDoublePointers(commandLineArgs);
-			exit(EXIT_CODE);
+			freeDoublePointers(path_arr);
+			freeDoublePointers(command);
+			exit(0);
 		}
-		pathname = getFullPath(patharray, commandLineArgs);
-		if (pathname == NULL)
+		if (access(command[0], F_OK) == 0)
 		{
-			freeDoublePointers(commandLineArgs);
+			execve(command[0], command, NULL);
+			freeDoublePointers(command);
 			continue;
 		}
-		fullPath = strConcat(pathname, commandLineArgs[0]);
-		if (executeCommand(fullPath, commandLineArgs) == -1)
+
+		file_folder = getDir(path_arr, command);
+		if (file_folder == NULL)
 		{
-			free(fullPath);
-			freeDoublePointers(commandLineArgs);
-			exit(127);
+			freeDoublePointers(command);
+			continue;
 		}
-		free(fullPath);
-		freeDoublePointers(commandLineArgs);
+		file_name = strConcat(file_folder, command[0]);
+
+		if (executeCommand(file_name, command) == -1)
+		{
+			free(file_name);
+			freeDoublePointers(command);
+			exit(0);
+		}
+		free(file_name);
+		freeDoublePointers(command);
 	}
 	return (0);
 }

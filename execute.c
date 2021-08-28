@@ -23,7 +23,6 @@ int executeCommand(char *fullPath, char **commandLineArgs)
 	else
 	{
 		wait(&status);
-		EXIT_CODE = WEXITSTATUS(status);
 	}
 	return (0);
 }

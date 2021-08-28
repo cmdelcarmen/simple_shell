@@ -22,7 +22,7 @@ char *strConcat(char *s1, char *s2);
 int _strcmp(char *s1, char *s2);
 char **getArray(char *usrinput);
 char **get_path(char **env);
-char *getFullPath(char **path, char **command);
+char *getDir(char **path, char **command);
 void freeDoublePointers(char **pointer);
 void printDoubleArray(char **pointer);
 int executeCommand(char *fullPath, char **commandLineArgs);

@@ -1,70 +1,83 @@
 gcc -g -Wall -Werror -Wextra -pedantic *.c *.h -o myshell
 
 echo "/bin/pwd" | ./myshell
-echo "/bin/pwd" | /bin/sh
-echo --
+echo "echo "/bin/pwd"" | /bin/sh
+echo ----NUMBER 1-FIX----
+echo
 
 echo "hi/" | ./myshell
-echo "hi/" | /bin/sh
-echo --
+echo "echo "hi/"" | /bin/sh
+echo ----NUMBER 2-FIX---
+echo
 
 echo "pwd/" | ./myshell
-echo "pwd/" | /bin/sh
-echo --
+echo "echo "pwd/"" | /bin/sh
+echo ----NUMBER 3----
 echo
-echo
+
+
 echo "echo hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" | ./myshell
 echo "echo hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" | /bin/sh
-echo --
+echo ----NUMBER 4----
+echo
 
 echo "/bin/" | ./myshell
-echo "/bin/" | /bin/sh
-echo --
+echo "echo "/bin/"" | /bin/sh
+echo ----NUMBER 5-FIX---
+echo
 
 echo "///" | ./myshell
-echo "///" | /bin/sh
-echo --
-
+echo "echo "///"" | /bin/sh
+echo ----NUMBER 6-FIX---
 echo
-echo "" | ./myshell
-echo "" | /bin/sh
-echo --
 
-echo AFTER EMPTY STRING
-echo --
+echo "" | ./myshell
+echo "echo """ | /bin/sh
+echo ----NUMBER 7-FIX---
+echo
+
 
 echo "//pwd" | ./myshell
-echo "//pwd" | /bin/sh
-echo --
+echo "echo "//pwd"" | /bin/sh
+echo ----NUMBER 8-FIX---
+echo
 
 echo "     /biin/pwd" | ./myshell
-echo "     /biin/pwd" | /bin/sh
-echo  --
+echo "echo "     /biin/pwd"" | /bin/sh
+echo ----NUMBER 9-FIX---
+echo
 
 echo "bin/pwd" | ./myshell
-echo "bin/pwd" | /bin/sh
-echo  --
+echo "echo "bin/pwd"" | /bin/sh
+echo ----NUMBER 10-FIX---
+echo
 
 echo "exit" | ./myshell
-echo "exit" | /bin/sh
-echo --
+echo "echo "exit"" | /bin/sh
+echo ----NUMBER 11----
+echo
 
 cat lob | ./myshell
-cat lob | /bin/sh
-echo --
+echo "cat lob" | /bin/sh
+echo ----NUMBER 12----
+echo
 
 cat filedoesnotexist | ./myshell
-cat filedoesnotexist | /bin/sh
-echo --
+echo "cat filedoesnotexist" | /bin/sh
+echo ----NUMBER 13----
+echo
 
 echo "*" | ./myshell
-echo "*" | /bin/sh
-echo --
+echo "echo "*"" | /bin/sh
+echo ----NUMBER 14-FIX---
+echo
 
 echo "&&" | ./myshell
-echo "&&" | /bin/sh
+echo "echo "&&"" | /bin/sh
+echo ----NUMBER 15-FIX---
 echo
 
 echo -e "\t  ls" | ./myshell
-echo -e "\t  ls" | /bin/sh
+echo "echo -e "\t  ls"" | /bin/sh
+echo ----NUMBER 16---
 echo
