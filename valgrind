@@ -1,3 +1,0 @@
-#!/bin/bash
-gcc -Wall -Werror -Wextra -pedantic -g *.c *.h -o myshell
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./myshell
