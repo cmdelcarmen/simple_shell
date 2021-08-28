@@ -55,15 +55,17 @@ I. File List
 - sh_path.c  
   - Contains our get_path function that splits the PATH into a 2D array.
 - sh_input.c  
-  - Contains functions that handle the user input and convert it into an array.  
+  - Contains functions that handle the user input and convert it into a 2D array.  
 - sh_ string_concat.c  
-  - Contains functions that concatenate char arrays.  
+  - Contains functions that concatenate strings.  
 - sh_get_path.c  
   - Contains function that checks the PATH for the specified executuble.  
 - sh_execve.c
-  - Contains function that duplicates process and executes commands.  
+  - Contains function that creates a new process and executes the command.  
 - sh_double_pointers.c
-  - Contains funtion that frees double pointers. 
+  - Contains funtion that frees/prints double pointers. 
+- sh_helper_functions.c 
+  - Contains functions that help us run the code.
 
 II. Design
 ----------
@@ -85,77 +87,4 @@ main.c	path.c	execute.c	stringConcat.c
 /home/vagrant/shell/simple_shell  
 
 **/bin/pwd**  
-/home/vagrant/shell/simple_shell  
-
-III. File Descriptions
-----------------------
-A. **shell_header.h**  
-
-This is our header file. It contains the libraries used in our code:  
-  
-#include <stdio.h>  
-#include <stdlib.h>  
-#include <unistd.h>  
-#include <string.h>  
-#include <sys/types.h>  
-#include <sys/stat.h>  
-#include <sys/wait.h>  
-#include <fcntl.h>  
-#include <dirent.h>  
-  
-The prototypes for all functions are also listed here.  
-
-B. **main.c**  
-
-Contains:  
-int main(int ac, char **av, char **env)  
-Function uses the int main(int ac, char **av, char **env) declaration in order to take in values
-for main before running our simple shell program and get the enviroment variables in order to 
-find the PATH.  
-
-C. **path.c**  
-
-Contains:  
-char **get_path(char **env)  
-Function parses through the enviroment variables and returns the PATH array.  
-
-D. **input.c**  
-
-Contains:  
-char **input(void)  
-char **getArray(char *usrinput)  
- int _strcmp(char *s1, char *s2)  
-
-First user input is acquired in input function. The input from user is set to the getArray function,
-that converts the input into a 2D array. The compare function is used to validate commands like "exit"  
-
-E. **stringConcat.c**  
-
-Contains:  
-char *strConcat(char *s1, char *s2)  
-The user's input and the directory returned by getFullPath are pass to this function that concatenates
-both string into a single string and returns it to main.  
-
-F. **getFullPath.c**  
-
-Contains:  
-char *getFullPath(char **patharray, char **commandLineArgs)  
-
-Functions recieves the PATH array found by get_path and opens every directory and goes throught all the files
-in the directories comparing it with the user's input until it finds the folder for the command. Once found
-it returns the directore with the folder that contains the binary code to run the command.  
-
-G.**execute.c**  
-
-Contains:  
-void executeCommand(char *fullPath, char **commandLineArgs)  
-
-The function recieves the concatenated string made by strConcat and the input from the user and runs both
-variables with the exceve command to run the command.  
-
-H.**freePointers.c**  
-
-Contains:  
-void freeDoublePointers(char **pointer)  
-
-This function frees any memory allocated for a pointer.  
+/home/vagrant/shell/simple_shell   
