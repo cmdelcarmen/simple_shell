@@ -1,4 +1,4 @@
-#include "shell_header.h"
+#include "sh_header.h"
 
 /**
  * input - function gets input from user
@@ -53,6 +53,89 @@ char **input(char **patharray)
 }
 
 /**
+ * prompt - function checks to see if prompt needs to be printed
+ */
+void prompt(void)
+{
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		_putchar('$');
+		_putchar(' ');
+	}
+
+}
+
+/**
+ *  pathInput - function modifies user input and returns command
+ * without the executable
+ * @usrinput: input from user
+ * @patharray: path array
+ * Return: returns pointer
+ */
+char *pathInput(char *usrinput, char **patharray)
+{
+	int count, count2 = 0, index1 = 0, lastBracketIndex = 0, num = 0;
+	char *modedUsrInput;
+	int matches = 0;
+
+	modedUsrInput = malloc(sizeof(char) * 100);
+
+	index1 = moveIndex(usrinput);
+
+	/*Plus 1 so it does not start at '/'*/
+	for (count = index1 + 1; usrinput[count] != '\0'; count++)
+	{
+		if (usrinput[count] == '/')
+		{
+			lastBracketIndex = count;
+			num++;
+		}
+	}
+	matches = verifyPath(usrinput, patharray);
+
+	if (matches == 0)
+	{
+		free(modedUsrInput);
+		return (usrinput);
+	}
+
+	if (usrinput[lastBracketIndex + 1] == '\0' || (num == 0))
+	{
+		free(modedUsrInput);
+		return (usrinput);
+	}
+	count2 = 0;
+	for (count = lastBracketIndex + 1; usrinput[count] != '\0'; count++)
+	{
+		modedUsrInput[count2] = usrinput[count];
+		count2++;
+	}
+	modedUsrInput[count2] = '\0';
+
+	free(usrinput);
+	return (modedUsrInput);
+}
+
+/**
+ * checkIfInputAllSpaces - function checks to see if input is all spaces
+ * @usrinput: user input
+ * Return: 0 if it is not all spaces, 1 if it is all spaces
+ */
+int checkIfInputAllSpaces(char *usrinput)
+{
+	int count;
+
+	for (count = 0; usrinput[count] != '\0'; count++)
+	{
+		if (usrinput[count] != 32)
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
+
+/**
  * getArray - function converts user input into an array
  * @usrinput: user input
  * Return: commandLineArgs
@@ -102,20 +185,23 @@ char **getArray(char *usrinput)
 }
 
 /**
- * _strcmp - function compares two strings
- * @s1: string to compare
- * @s2: string to compare
- * Return: 0 if strings are the same, -1 if not
+ * handlesNullInput - functions checks for NULL input
+ * @usrinput: user or file input
+ * Return: NULL
  */
-int _strcmp(char *s1, char *s2)
+char **handlesNullInput(char *usrinput)
 {
-	int count;
+	free(usrinput);
+	return (NULL);
+}
 
-	for (count = 0; s1[count] != '\0' || s2[count] != '\0'; count++)
-	{
-		if (s1[count] != s2[count])
-			return (-1);
-	}
-
-	return (0);
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ * Return: On error, -1 is returned, and errno is set appropriately.
+ * Description: Function to print characters
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
 }

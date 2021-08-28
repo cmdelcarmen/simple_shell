@@ -1,4 +1,4 @@
-#include "shell_header.h"
+#include "sh_header.h"
 
 void get_c(int sig);
 /**
@@ -17,6 +17,7 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	signal(SIGINT, get_c);
 	path_arr = get_path(env);
+
 	while (1)
 	{
 		command = input(path_arr);
@@ -63,28 +64,4 @@ int main(int ac, char **av, char **env)
 		freeDoublePointers(command);
 	}
 	return (0);
-}
-
-/**
- * prompt - function checks to see if prompt needs to be printed
- */
-void prompt(void)
-{
-	if (isatty(STDIN_FILENO) == 1)
-	{
-		_putchar('$');
-		_putchar(' ');
-	}
-
-}
-
-/**
- * handlesNullInput - functions checks for NULL input
- * @usrinput: user or file input
- * Return: NULL
- */
-char **handlesNullInput(char *usrinput)
-{
-	free(usrinput);
-	return (NULL);
 }

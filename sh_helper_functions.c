@@ -1,4 +1,4 @@
-#include "shell_header.h"
+#include "sh_header.h"
 
 /**
  * numberOfElementsInArray - function counts the number of commans/
@@ -47,25 +47,6 @@ int moveIndex(char *usrinput)
 	}
 
 	return (index1);
-}
-
-/**
- * checkIfInputAllSpaces - function checks to see if input is all spaces
- * @usrinput: user input
- * Return: 0 if it is not all spaces, 1 if it is all spaces
- */
-int checkIfInputAllSpaces(char *usrinput)
-{
-	int count;
-
-	for (count = 0; usrinput[count] != '\0'; count++)
-	{
-		if (usrinput[count] != 32)
-		{
-			return (0);
-		}
-	}
-	return (1);
 }
 
 /**
@@ -147,4 +128,61 @@ int verifyPath(char *usrinput, char **patharray)
 		return (0);
 
 	return (0);
+}
+/**
+ * _strcmp - function compares two strings
+ * @s1: string to compare
+ * @s2: string to compare
+ * Return: 0 if strings are the same, -1 if not
+ */
+int _strcmp(char *s1, char *s2)
+{
+	int count;
+
+	for (count = 0; s1[count] != '\0' || s2[count] != '\0'; count++)
+	{
+		if (s1[count] != s2[count])
+			return (-1);
+	}
+
+	return (0);
+}
+
+/**
+ * _strcmp2 - function compares input with directories
+ * @s1: string to compare
+ * @s2: string to compare
+ * Return: 0 if strings are the same, -1 if not
+ */
+int _strcmp2(char *s1, char *s2)
+{
+	int count;
+
+	for (count = 0; s2[count] != '\0'; count++)
+	{
+		if (s1[count] == s2[count])
+		{
+			;
+		}
+		else
+		{
+			if (s2[count] == '/' && s1[count] == '\0' && s2[count + 1] == '\0')
+			{
+				return (0);
+			}
+			return (-1);
+		}
+	}
+	return (0);
+}
+/**
+ * get_c - handle ^C
+ *
+ * @sig: the signal
+ */
+
+void get_c(int sig)
+{
+	write(STDOUT_FILENO, "\n$ ", 3);
+	signal(sig, get_c);
 }

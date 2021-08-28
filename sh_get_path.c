@@ -1,4 +1,4 @@
-#include "shell_header.h"
+#include "sh_header.h"
 
 /**
  * getDir - function parses through path array and opens every

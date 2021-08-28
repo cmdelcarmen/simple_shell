@@ -1,4 +1,4 @@
-#include "shell_header.h"
+#include "sh_header.h"
 
 /**
  * get_path - function finds the PATH value of the enviroment
@@ -47,57 +47,6 @@ char **get_path(char **env)
 	free(hold);
 
 	return (patharray);
-}
-
-/**
- *  pathInput - function modifies user input and returns command
- * without the executable
- * @usrinput: input from user
- * @patharray: path array
- * Return: returns pointer
- */
-char *pathInput(char *usrinput, char **patharray)
-{
-	int count, count2 = 0, index1 = 0, lastBracketIndex = 0, num = 0;
-	char *modedUsrInput;
-	int matches = 0;
-
-	modedUsrInput = malloc(sizeof(char) * 100);
-
-	index1 = moveIndex(usrinput);
-
-	/*Plus 1 so it does not start at '/'*/
-	for (count = index1 + 1; usrinput[count] != '\0'; count++)
-	{
-		if (usrinput[count] == '/')
-		{
-			lastBracketIndex = count;
-			num++;
-		}
-	}
-	matches = verifyPath(usrinput, patharray);
-
-	if (matches == 0)
-	{
-		free(modedUsrInput);
-		return (usrinput);
-	}
-
-	if (usrinput[lastBracketIndex + 1] == '\0' || (num == 0))
-	{
-		free(modedUsrInput);
-		return (usrinput);
-	}
-	count2 = 0;
-	for (count = lastBracketIndex + 1; usrinput[count] != '\0'; count++)
-	{
-		modedUsrInput[count2] = usrinput[count];
-		count2++;
-	}
-	modedUsrInput[count2] = '\0';
-
-	free(usrinput);
-	return (modedUsrInput);
 }
 
 /**
