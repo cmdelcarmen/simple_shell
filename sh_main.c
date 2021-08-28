@@ -39,6 +39,7 @@ int main(int ac, char **av, char **env)
 			freeDoublePointers(command);
 			exit(0);
 		}
+		/*Handles an executable being passed*/
 		if (access(command[0], F_OK) == 0)
 		{
 			execve(command[0], command, NULL);

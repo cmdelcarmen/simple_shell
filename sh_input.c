@@ -7,16 +7,20 @@
  */
 char **input(char **patharray)
 {
-	ssize_t length, allSpaces;
+	ssize_t length;
 	size_t inputSize = 50;
 	char *usrinput = NULL, *newInput = NULL;
 
 	prompt();
 	length = getline(&usrinput, &inputSize, stdin);
+
+	/*Checking if input came from terminal or for EOF*/
 	if (length == EOF || (length == 1 && (isatty(STDIN_FILENO) == 0)))
 	{
 		return (handlesNullInput(usrinput));
 	}
+
+	/*Keeps printint out the prompt while no input is entered*/
 	if (length == 1 && (isatty(STDIN_FILENO) == 1))
 	{
 		while (length == 1)
@@ -26,9 +30,8 @@ char **input(char **patharray)
 		}
 	}
 	usrinput[length - 1] = '\0';
-	allSpaces = checkIfInputAllSpaces(usrinput);
 
-	while (allSpaces == 1)
+	while (checkIfInputAllSpaces(usrinput))
 	{
 		prompt();
 		length = getline(&usrinput, &inputSize, stdin);
@@ -36,9 +39,11 @@ char **input(char **patharray)
 			return (handlesNullInput(usrinput));
 		
 		usrinput[length - 1] = '\0';
-		allSpaces = checkIfInputAllSpaces(usrinput);
 	}
-	if ((checkIfPath(usrinput)) == 1)
+
+	/*Checks to see if user entered the direct path to the command file,
+	 * like "/bin/ls"*/
+	if (checkIfPath(usrinput))
 	{
 		newInput = pathInput(usrinput, patharray);
 		if (newInput == NULL)
