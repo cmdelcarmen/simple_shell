@@ -37,8 +37,6 @@ List of allowed functions and system calls
 	wait4 (man 2 wait4)  
 	write (man 2 write)  
 
-	Our project is to write a simple UNIX command interpreter. Our shell can only use functions from the allowed list below.
-	Further down we list examples of how our Shell output should look like, and what it can handle.
 
 
 **Compiled with**  
