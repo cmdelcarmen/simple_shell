@@ -67,8 +67,7 @@ I. File List
 
 II. Design
 ----------
-The program is designed to mimic the abilities of a simple shell. It is capable of handling
-simple commands with arguments. For example "ls -l". It can also handle the PATH as an argument, for example 
+The program is designed to mimic the abilities of a simple shell. It is capable of handling commands with arguments. For example "ls -l". It can also handle the path as an argument, for example 
 "/bin/ls". It works also in nonteractive mode, for example "echo "/bin/ls" | ./myshell". Below are some examples:
 
 Example:  
