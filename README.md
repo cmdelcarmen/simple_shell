@@ -48,24 +48,22 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./myshell
 
 I. File List
 ------------
-- shell_header.h  
+- sh_header.h  
   - Header file. Contains libraries & prototypes.  
-- main.c  
+- sh_main.c  
   - Contains main function. It finds the enviroment PATH and calls other functions until user enters "exit".  
-- path.c  
+- sh_path.c  
   - Contains our get_path function that splits the PATH into a 2D array.
-- input.c  
+- sh_input.c  
   - Contains functions that handle the user input and convert it into an array.  
-- stringConcat.c  
+- sh_ string_concat.c  
   - Contains functions that concatenate char arrays.  
-- getFullPath.c  
+- sh_get_path.c  
   - Contains function that checks the PATH for the specified executuble.  
-- execute.c
+- sh_execve.c
   - Contains function that duplicates process and executes commands.  
-- freePointers.c
-  - Contains funtion that frees double pointers.  
-- lengths.c
-  -contains functions that work with our input file to trim any extra spaces off the input and allow executables to be entered in as input.
+- sh_double_pointers.c
+  - Contains funtion that frees double pointers. 
 
 II. Design
 ----------
